@@ -9,3 +9,4 @@ create table empresa (
 	telcontemp numeric(20) not null,
 	tipoemp char(1) not null
 );
+.
