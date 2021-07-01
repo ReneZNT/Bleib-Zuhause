@@ -61,6 +61,12 @@ CREATE TABLE sintoma(
 	valor integer NOT NULL,
 	cpfpac integer NOT NULL constraint paciente_pk,
 	REFERENCES paciente(cpfpac);
-	
 );
 
+CREATE TABLE gravidade(
+	idteste integer constraint teste_pk primary key,
+	codgravC integer NOT NULL, 
+	resultado char (1) NOT NULL,
+	cpfpac integer NOT NULL constraint paciente_pk,
+	REFERENCES paciente(cpfpac);
+);
