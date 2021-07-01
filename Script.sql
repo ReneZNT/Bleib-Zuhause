@@ -86,3 +86,8 @@ CREATE TABLE vacina(
 	cpfpac integer NOT NULL constraint paciente_pk,
 	REFERENCES paciente(cpfpac)
 );
+CREATE TABLE tipo_de_paciente(
+	codtippac integer constraint tipo_de_paciente_pk primary key,
+	DESC varchar(255) NOT NULL,
+);
+
