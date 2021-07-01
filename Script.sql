@@ -18,23 +18,19 @@ CREATE TABLE cep (
 CREATE TABLE cidade (
 	codCid integer NOT NULL,
 	nomcid varchar(255) NOT NULL,
-	codest integer not null constraint estado_codest_fk 
-		references estado(codest)
-	cep integer not null constraint cep_cep_fk 
-		references cep(cep)
+	codEst
 );
 
-CREATE TABLE triagem_usuario_paciente (
+CREATE TABLE triagem(
+	codtri integer constraint triagem_pk primary key,
 	pesopac real (6) NOT NULL,
 	altpac integer NOT NULL,
 	alerpac char(1) NOT NULL,
 	compac char(2) NOT NULL,
 	tipcompac varchar(255) NOT NULL,
 	papac NUMERIC (5,2) NOT NULL,
-	cpfpac integer NOT NULL constraint cadusuariopac_pk,
-	REFERENCES cadastro_usuario_paciente(cpfpac);
-	prontpac integer NOT NULL constraint cadusuariopac_pk, 
-	REFERENCES cadastro_usuario_paciente(prontpac)
+	cpfpac2 integer NOT NULL constraint paciente_pk,
+	REFERENCES paciente(cpfpac2)
 );
 
 CREATE TABLE sintomas_covid_19(
