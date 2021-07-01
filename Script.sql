@@ -54,3 +54,13 @@ REFERENCES sintoma (codsin),
 CONSTRAINT codtri integer FOREIGN KEY (triagem),
 REFERENCES triagem (codtri)
 );
+
+CREATE TABLE sintoma(
+	codsin integer constraint paciente_pk primary key,
+	DESC varchar(255) NOT NULL, 
+	valor integer NOT NULL,
+	cpfpac integer NOT NULL constraint paciente_pk,
+	REFERENCES paciente(cpfpac);
+	
+);
+
