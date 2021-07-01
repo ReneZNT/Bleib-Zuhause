@@ -60,21 +60,29 @@ CREATE TABLE sintoma(
 	DESC varchar(255) NOT NULL, 
 	valor integer NOT NULL,
 	cpfpac integer NOT NULL constraint paciente_pk,
-	REFERENCES paciente(cpfpac);
+	REFERENCES paciente(cpfpac)
 );
 
 CREATE TABLE gravidade(
 	codgrav integer NOT NULL, 
 	resultado char (1) NOT NULL,
 	cpfpac integer NOT NULL constraint paciente_pk,
-	REFERENCES paciente(cpfpac);
+	REFERENCES paciente(cpfpac)
 );
-
 
 CREATE TABLE teste(
 	idteste integer constraint teste_pk primary key,
 	tipteste integer NOT NULL, 
 	resultado char (1) NOT NULL,
 	cpfpac integer NOT NULL constraint paciente_pk,
-	REFERENCES paciente(cpfpac);
+	REFERENCES paciente(cpfpac)
+);
+
+CREATE TABLE vacina(
+	idvac integer constraint vacina_pk primary key,
+	tipvac varchar(255) NOT NULL, 
+	qtddose integer NOT NULL,
+	datadose integer NOT NULL,
+	cpfpac integer NOT NULL constraint paciente_pk,
+	REFERENCES paciente(cpfpac)
 );
