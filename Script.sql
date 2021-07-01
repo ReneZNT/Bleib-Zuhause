@@ -27,10 +27,25 @@ CREATE TABLE triagem_usuario_paciente (
 	alerpac char(1) NOT NULL,
 	compac char(2) NOT NULL,
 	tipcompac varchar(255) NOT NULL,
-	papac NUMERIC (5,2) NOT NULL
-	cpfpac integer NOT NULL constraint cadusuariopac_pk 
+	papac NUMERIC (5,2) NOT NULL,
+	cpfpac integer NOT NULL constraint cadusuariopac_pk,
 	REFERENCES cadastro_usuario_paciente(cpfpac);
-	prontpac integer NOT NULL constraint cadusuariopac_pk 
+	prontpac integer NOT NULL constraint cadusuariopac_pk, 
 	REFERENCES cadastro_usuario_paciente(prontpac)
-	
+);
+
+CREATE TABLE sintomas_covid_19(
+	arpac char(1) NOT NULL,
+	tospac char(1) NOT NULL,
+	dorcopac char(1) NOT NULL, 
+	garpac char(1) NOT NULL,
+	calapac char(1) NOT NULL, 
+	congpac char(1) NOT NULL, 
+	coripac char (1) NOT NULL,
+	tempac NUMERIC (3,1) NOT NULL,
+	dormuscpac char(1), 
+	cpfpac integer NOT NULL constraint cadusuariopac_pk,
+	REFERENCES cadastro_usuario_paciente(cpfpac);
+	prontpac integer NOT NULL constraint cadusuariopac_pk, 
+	REFERENCES cadastro_usuario_paciente(prontpac)
 );
