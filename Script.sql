@@ -70,6 +70,7 @@ CREATE TABLE gravidade(
 	REFERENCES paciente(cpfpac);
 );
 
+
 CREATE TABLE teste(
 	idteste integer constraint teste_pk primary key,
 	tipteste integer NOT NULL, 
