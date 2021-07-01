@@ -18,5 +18,8 @@ CREATE TABLE cep (
 CREATE TABLE cidade (
 	codCid integer NOT NULL,
 	nomcid varchar(255) NOT NULL,
-	codEst
+	codest integer not null constraint estado_codest_fk 
+		references estado(codest)
+	cep integer not null constraint cep_cep_fk 
+		references cep(cep)
 );
