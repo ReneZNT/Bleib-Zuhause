@@ -41,10 +41,10 @@ create table empresa (
 create table paciente (
 	cpfpac varchar(11) constraint paciente_pk primary key,
 	nompac varchar(255) not null, 
-	prontpac numeric(10) not null,
+	prontpac numeric(10) not null unique,
 	datnaspac date not null,
 	rgpac numeric(10) not null,
-	cnspac integer not null,
+	cnspac integer not null unique,
 	filipac varchar(255) not null,
 	endpac varchar(40) not null,
 	telcontpac varchar(40) not null,
@@ -205,8 +205,7 @@ values ('01574672377', 'Janaina Almeida', 21,  '1975-09-26', 3264971, 7485615, '
 
 --SINTOMAS
 insert into sintoma (codsin, descr, valor, cpfpac) values (1, 'Tosse', 1, '02132213145');
-
-insert into sintoma (codsin, descr, valor, cpfpac) values (2, 'Falta de ar', 1, '02132213145');
+insert into sintoma (codsin, descr, valor, cpfpac) values (2, 'Falta de ar', 1, '01678739204');
 
 --TRIAGEM
 insert into triagem (codtri, pesopac, altpac, alerpac, compac, papac, cpfpac) 
@@ -228,8 +227,17 @@ insert into teste(idteste, tipteste, resultado, cpfpac) values (0, 'Teste Rápido
 --VACINA
 insert into vacina(idvac, tipvac, qtddose, datadose, cpfpac) values (0, 'Astra Zaneca', 1,'2021/04/12', '02132213145');
 
-select cpfpac, nompac from paciente where extract(year from datnaspac) <= extract(year from current_timestamp)-40 and 
+select paciente.cpfpac, nompac from paciente where extract(year from datnaspac) <= extract(year from current_timestamp)-40 and 
 extract(year from datnaspac) >= extract(year from current_timestamp)-50;
+
+SELECT p.cpfpac,
+FROM paciente p 
+INNER JOIN sintoma s ON s.cpfpac = p.cpfpac;
+
+
+
+
+
 
 /* 1) Relacione o código e nome de pacientes com idades entre 40 e 50,
 que apresentaram falta de ar. 
