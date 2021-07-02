@@ -122,9 +122,6 @@ CREATE TABLE vacina(
 	REFERENCES paciente(cpfpac)
 );
 
-
-
-
 --INSERÇÃO DE DADOS
 
 --Tipo_de_Paciente
@@ -227,6 +224,10 @@ insert into teste(idteste, tipteste, resultado, cpfpac) values (0, 'Teste Rápido
 --VACINA
 insert into vacina(idvac, tipvac, qtddose, datadose, cpfpac) values (0, 'Astra Zaneca', 1,'2021/04/12', '02132213145');
 
+/* 1) Relacione o código e nome de pacientes com idades entre 40 e 50,
+que apresentaram falta de ar. 
+Relacione a consulta em ordem ascendente de nome */
+
 SELECT p.cpfpac, p.nompac
 FROM paciente p 
 left JOIN sintoma ON sintoma.cpfpac = p.cpfpac where extract(year from datnaspac) <= extract(year from current_timestamp)-40 and 
@@ -235,14 +236,6 @@ order by p.nompac asc;
 
 
 
-
-
-
-
-
-/* 1) Relacione o código e nome de pacientes com idades entre 40 e 50,
-que apresentaram falta de ar. 
-Relacione a consulta em ordem ascendente de nome */
 
 
 
