@@ -39,7 +39,7 @@ create table empresa (
 );
 
 create table paciente (
-	cpfpac integer constraint paciente_pk primary key,
+	cpfpac varchar(11) constraint paciente_pk primary key,
 	nompac varchar(255) not null, 
 	prontpac numeric(10) not null,
 	datnaspac date not null,
@@ -63,7 +63,7 @@ CREATE TABLE sintoma(
 	codsin integer constraint sintoma_pk primary key,
 	descr varchar(255) NOT NULL,
 	valor integer NOT NULL,
-	cpfpac integer NOT null,
+	cpfpac varchar(11) NOT null,
 	constraint paciente_fk foreign key(cpfpac) REFERENCES paciente(cpfpac)
 );
 
@@ -75,7 +75,7 @@ CREATE TABLE triagem (
 	alerpac varchar(255) NOT NULL,
 	compac char(1) NOT null constraint compac_ck check (compac in ('S', 'N')),
 	papac NUMERIC (5,2) NOT NULL,
-	cpfpac integer NOT null,
+	cpfpac varchar(11) NOT null,
 	constraint paciente_fk foreign key(cpfpac) REFERENCES paciente(cpfpac)
 );
 
@@ -83,7 +83,7 @@ CREATE TABLE comorbidade(
 	codcom integer NOT NULL, 
 	desccom varchar(255) NOT NULL,
 	valor integer NOT NULL,
-	cpfpac integer NOT NULL constraint paciente_pk
+	cpfpac varchar(11) NOT NULL constraint paciente_pk
 	REFERENCES paciente(cpfpac)
 );
 
@@ -100,7 +100,7 @@ REFERENCES triagem(codtri)
 CREATE TABLE gravidade(
 	codgrav integer NOT NULL, 
 	resultado integer NOT NULL,
-	cpfpac integer NOT NULL constraint paciente_pk
+	cpfpac varchar(11) NOT NULL constraint paciente_pk
 	REFERENCES paciente(cpfpac)
 );
 
@@ -108,7 +108,7 @@ CREATE TABLE teste(
 	idteste integer constraint teste_pk primary key,
 	tipteste varchar(255) NOT NULL, 
 	resultado char (1) NOT null constraint resultado_ck check (resultado in ('P', 'N')),
-	cpfpac integer NOT NULL constraint paciente_pk
+	cpfpac varchar(11) NOT NULL constraint paciente_pk
 	REFERENCES paciente(cpfpac)
 );
 
@@ -118,7 +118,7 @@ CREATE TABLE vacina(
 	tipvac varchar(255) NOT NULL, 
 	qtddose integer NOT NULL,
 	datadose date NOT NULL,
-	cpfpac integer NOT NULL constraint paciente_pk
+	cpfpac varchar(11) NOT NULL constraint paciente_pk
 	REFERENCES paciente(cpfpac)
 );
 
@@ -130,8 +130,8 @@ CREATE TABLE vacina(
 --Tipo_de_Paciente
 
 insert into tipo_de_paciente (codtippac, descr) values (0, 'Administrativo');
-insert into tipo_de_paciente (codtippac, descr) values (1, 'Privativo');
-insert into tipo_de_paciente (codtippac, descr) values (2, 'Leitura');
+insert into tipo_de_paciente (codtippac, descr) values (1, 'Leitura');
+insert into tipo_de_paciente (codtippac, descr) values (2, 'Privativo');
 
 --Estados
 
@@ -196,30 +196,45 @@ values (47832943092843, 'Matheus Celulares', 'Matheus', 'MT Cell LTDA', 'Rua XV 
 
 --PACIENTES
 insert into paciente (cpfpac, nompac, prontpac, datnaspac, rgpac, cnspac, filipac, endpac, telcontpac, sexpac, expcadpac, escolpac, codcep, codtippac)
-values (02132213145, 'Luana dos Santos', 65,  '1999-04-08', 6352433, 23423, 'Maria Conceição dos Santos', 'Rua Valdomiro', 4998487732, 'F', '2021-02-20', 'Ensino Médio',  89874000, 0);
+values ('02132213145', 'Luana dos Santos', 65,  '1999-04-08', 6352433, 23423, 'Maria Conceição dos Santos', 'Rua Valdomiro', 4998487732, 'F', '2021-02-20', 'Ensino Médio',  89874000, 0);
+insert into paciente (cpfpac, nompac, prontpac, datnaspac, rgpac, cnspac, filipac, endpac, telcontpac, sexpac, expcadpac, escolpac, codcep, codtippac)
+values ('01678739204', 'Joao Brandao', 53,  '1980-07-12', 5849467, 85746, 'Dalvina Brandao', 'Rua Jeremias', 48969412564, 'M', '2021-01-14', 'Ensino Superior',  98530000, 0);
+insert into paciente (cpfpac, nompac, prontpac, datnaspac, rgpac, cnspac, filipac, endpac, telcontpac, sexpac, expcadpac, escolpac, codcep, codtippac)
+values ('01574672377', 'Janaina Almeida', 21,  '1975-09-26', 3264971, 7485615, 'Josué Almeida', 'Rua Bahia', 49975491237, 'F', '2020-11-09', 'Ensino Fundamental',  98500000, 0);
 
 
 --SINTOMAS
-insert into sintoma (codsin, descr, valor, cpfpac) values (1, 'Tosse', 1, 02132213145);
+insert into sintoma (codsin, descr, valor, cpfpac) values (1, 'Tosse', 1, '02132213145');
+
+insert into sintoma (codsin, descr, valor, cpfpac) values (2, 'Falta de ar', 1, '02132213145');
 
 --TRIAGEM
 insert into triagem (codtri, pesopac, altpac, alerpac, compac, papac, cpfpac) 
-values (43, 65.3, 160, 'Alergia anti estaminico', 'S', 12.8, 02132213145);
+values (43, 65.3, 160, 'Alergia anti estaminico', 'S', 12.8, '02132213145');
 
 
 --TRIAGEM_SINTOMA
 insert into triagem_sintoma(codsin, codtri) values (1, 43);
 
 --COMORBIDADES
-insert into comorbidade(codcom, desccom, valor, cpfpac) values (0, 'hipertensão', 5, 02132213145);
+insert into comorbidade(codcom, desccom, valor, cpfpac) values (0, 'hipertensão', 5, '02132213145');
 
 --GRAVIDADE
-insert into gravidade(codgrav, resultado, cpfpac) values (0, 80, 02132213145);
+insert into gravidade(codgrav, resultado, cpfpac) values (0, 80, '02132213145');
 
 --TESTE COVID
-insert into teste(idteste, tipteste, resultado, cpfpac) values (0, 'Teste Rápido', 'P', 02132213145);
+insert into teste(idteste, tipteste, resultado, cpfpac) values (0, 'Teste Rápido', 'P', '02132213145');
 
 --VACINA
-insert into vacina(idvac, tipvac, qtddose, datadose, cpfpac) values (0, 'Astra Zaneca', 1,'2021/04/12', 02132213145);
+insert into vacina(idvac, tipvac, qtddose, datadose, cpfpac) values (0, 'Astra Zaneca', 1,'2021/04/12', '02132213145');
+
+select cpfpac, nompac from paciente where extract(year from datnaspac) <= extract(year from current_timestamp)-40 and 
+extract(year from datnaspac) >= extract(year from current_timestamp)-50;
+
+/* 1) Relacione o código e nome de pacientes com idades entre 40 e 50,
+que apresentaram falta de ar. 
+Relacione a consulta em ordem ascendente de nome */
+
+
 
 
