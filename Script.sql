@@ -206,7 +206,7 @@ values ('01574672377', 'Janaina Almeida', 21,  '1975-09-26', 3264971, 7485615, '
 --SINTOMAS
 insert into sintoma (codsin, descr, valor, cpfpac) values (1, 'Tosse', 1, '02132213145');
 insert into sintoma (codsin, descr, valor, cpfpac) values (2, 'Falta de ar', 1, '01678739204');
-
+insert into sintoma (codsin, descr, valor, cpfpac) values (3, 'Falta de ar', 1, '01574672377');
 --TRIAGEM
 insert into triagem (codtri, pesopac, altpac, alerpac, compac, papac, cpfpac) 
 values (43, 65.3, 160, 'Alergia anti estaminico', 'S', 12.8, '02132213145');
@@ -227,12 +227,13 @@ insert into teste(idteste, tipteste, resultado, cpfpac) values (0, 'Teste Rápido
 --VACINA
 insert into vacina(idvac, tipvac, qtddose, datadose, cpfpac) values (0, 'Astra Zaneca', 1,'2021/04/12', '02132213145');
 
-select paciente.cpfpac, nompac from paciente where extract(year from datnaspac) <= extract(year from current_timestamp)-40 and 
-extract(year from datnaspac) >= extract(year from current_timestamp)-50;
-
-SELECT p.cpfpac,
+SELECT p.cpfpac, p.nompac
 FROM paciente p 
-INNER JOIN sintoma s ON s.cpfpac = p.cpfpac;
+left JOIN sintoma ON sintoma.cpfpac = p.cpfpac where extract(year from datnaspac) <= extract(year from current_timestamp)-40 and 
+extract(year from datnaspac) >= extract(year from current_timestamp)-50 and sintoma.descr = 'Falta de ar'
+order by p.nompac asc;
+
+
 
 
 
